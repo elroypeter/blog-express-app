@@ -1,0 +1,36 @@
+<div class="container-xl px-4 mt-4">
+    {{!-- use nav partials --}}
+    {{> nav}}
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <h1>Edit post</h1>
+
+            <form action="/posts/{{post.dataValues.id}}/edit" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="title">Post Image <span class="require"></span></label>
+                    <input type="file" class="form-control" name="postImage" />
+                </div>
+                
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" name="title" value="{{post.dataValues.title}}" />
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea rows="5" class="form-control" name="description">
+                    {{post.dataValues.content}}
+                    </textarea>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">
+                    Update
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

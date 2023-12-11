@@ -1,0 +1,9 @@
+<nav class="nav nav-borders">
+  <a class="nav-link active ms-0" href="/posts" target="__blank">Posts</a>
+  <a class="nav-link active ms-0" href="/posts/create" target="__blank">Create Post</a>
+  <a class="nav-link" href="/user-profile" target="__blank">Profile</a>
+  {{#if user}}
+    <a class="nav-link ml-auto" href="/auth/logout" target="__blank">Logout</a>
+  {{/if}}
+</nav>
+<hr class="mt-0 mb-4">

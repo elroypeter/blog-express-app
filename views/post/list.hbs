@@ -1,0 +1,64 @@
+<div class="container-xl px-4 mt-4">
+    {{!-- use nav partials --}}
+    {{> nav}}
+
+    <div class="row mx-0">
+        {{#each posts}}
+            <div class="post-list">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="picture">
+                            {{#if dataValues.cover_image}}
+                                <img width="250" alt="Opt wizard thumbnail" src="uploads/{{dataValues.cover_image}}">
+                            {{else}}
+                                <img width="250" alt="Opt wizard thumbnail" src="https://www.bootdey.com/image/400x200/FFB6C1/000000">
+                            {{/if}}
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <h4>
+                            <label class="label label-info">{{dataValues.title}}</label>
+                        </h4>
+                        <h6> 
+                            <b>Author: </b>
+                            {{dataValues.User.dataValues.name}}
+                        </h6>
+                        <p class="description">
+                            {{dataValues.content}}
+                        </p>    
+                    </div>
+                    <div class="col-sm-4">
+                        {{#isEqual @root.user.id dataValues.User.dataValues.id}}
+                            <a class="btn btn-danger btn-download btn-round pull-right makeLoading ml-1" href="/posts/{{dataValues.id}}/delete">
+                                <i class="fa fa-trash"></i> Delete
+                            </a>  
+                            <a class="btn btn-primary btn-download btn-round pull-right makeLoading ml-1" href="/posts/{{dataValues.id}}/edit">
+                                <i class="fa fa-pencil"></i> Edit
+                            </a> 
+                        {{/isEqual}}
+                        <a class="btn btn-info btn-download btn-round pull-right makeLoading" href="/posts/{{dataValues.id}}">
+                            <i class="fa fa-share"></i> View
+                        </a> 
+                    </div>
+                    <div class="col-12">
+                        <ul class="list-inline d-sm-flex my-0">
+                            <li class="list-inline-item g-mr-20">
+                            <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="/likes/{{dataValues.id}}">
+                                <i class="fa fa-thumbs-up g-pos-rel g-top-1 g-mr-3"></i>
+                                {{dataValues.PostLikes.length}}
+                            </a>
+                            </li>
+                            <li class="list-inline-item ml-auto">
+                                <a class="u-link-v5 g-color-gray-dark-v4 g-color-primary--hover" href="/posts/{{dataValues.id}}">
+                                    <i class="fa fa-comment g-pos-rel g-top-1 g-mr-3"></i>
+                                    {{dataValues.Comments.length}} Comments
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        {{/each}}
+    </div>
+</div>

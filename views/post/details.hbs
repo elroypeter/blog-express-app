@@ -1,0 +1,143 @@
+<div class="container-xl px-4 mt-4">
+    {{!-- use nav partials --}}
+    {{> nav}}
+
+    <style>
+      .post-content{
+        background: #f8f8f8;
+        border-radius: 4px;
+        width: 100%;
+        border: 1px solid #f1f2f2;
+        margin-bottom: 20px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .post-content img.post-image, video.post-video, .google-maps{
+        width: 100%;
+        height: auto;
+      }
+
+      .post-content .google-maps .map{
+        height: 300px;
+      }
+
+      .post-content .post-container{
+        padding: 20px;
+      }
+
+      .post-content .post-container .post-detail{
+        margin-left: 65px;
+        position: relative;
+      }
+
+      .post-content .post-container .post-detail .post-text{
+        line-height: 24px;
+        margin: 0;
+      }
+
+      .post-content .post-container .post-detail .reaction{
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+
+      .post-content .post-container .post-detail .post-comment{
+        display: inline-flex;
+        margin: 10px auto;
+        width: 100%;
+      }
+
+      .post-content .post-container .post-detail .post-comment img.profile-photo-sm{
+        margin-right: 10px;
+      }
+
+      .post-content .post-container .post-detail .post-comment .form-control{
+        height: 30px;
+        border: 1px solid #ccc;
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+        margin: 7px 0;
+        min-width: 0;
+      }
+
+      img.profile-photo-md {
+          height: 50px;
+          width: 50px;
+          border-radius: 50%;
+      }
+
+      img.profile-photo-sm {
+          height: 40px;
+          width: 40px;
+          border-radius: 50%;
+      }
+
+      .text-green {
+          color: #8dc63f;
+      }
+
+      .text-red {
+          color: #ef4136;
+      }
+
+      .following {
+          color: #8dc63f;
+          font-size: 12px;
+          margin-left: 20px;
+      }
+    </style>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="post-content">
+                {{#if post.dataValues.cover_image}}
+                    <img src="/uploads/{{post.dataValues.cover_image}}" alt="post-image" class="img-responsive post-image">
+                {{else}}
+                    <img src="https://www.bootdey.com/image/400x150/FFB6C1/000000" alt="post-image" class="img-responsive post-image">
+                {{/if}}
+              <div class="post-container">
+                {{#if post.dataValues.User.dataValues.avatar}}
+                    <img src="/uploads/{{post.dataValues.User.dataValues.avatar}}" alt="user" class="profile-photo-md pull-left">
+                {{else}}
+                    <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="user" class="profile-photo-md pull-left">
+                {{/if}}
+                <div class="post-detail">
+                  <div class="user-info">
+                    <h5><a href="timeline.html" class="profile-link">{{post.dataValues.User.dataValues.name}}</a></h5>
+                    <h4 class="text-muted">{{post.dataValues.title}}</h4>
+                  </div>
+                  <div class="reaction">
+                    <a class="btn text-green"><i class="fa fa-thumbs-up"></i>{{post.dataValues.PostLikes.length}}</a>
+                  </div>
+                  <div class="line-divider"></div>
+                  <div class="post-text">
+                    <p>{{post.dataValues.content}}</p>
+                  </div>
+                  <hr>
+                  {{#each post.dataValues.Comments as | comment |}}
+                    <div class="post-comment">
+                      {{#if comment.dataValues.User.dataValues.avatar}}
+                        <img src="/uploads/{{comment.dataValues.User.dataValues.avatar}}" alt="user" class="profile-photo-md pull-left">
+                      {{else}}
+                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" class="profile-photo-sm">               
+                      {{/if}}
+                                          
+                      <p>
+                        <a href="timeline.html" class="profile-link">{{comment.dataValues.User.dataValues.name}}</a>
+                        <i class="em em-laughing"></i>{{comment.dataValues.content}}</p>
+                    </div>
+                  {{/each}}
+                  <div class="post-comment">
+                    <img src="/uploads/{{user.avatar}}" alt="" class="profile-photo-sm">
+                    <form action="/comments" method="post" style="width: 100%;">
+                      <input hidden type="text" class="form-control" placeholder="Post a comment" name="postId" value="{{post.dataValues.id}}">
+                      <input type="text" class="form-control" placeholder="Post a comment" name="description">
+                      <button class="btn btn-primary btn-sm">Post</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>

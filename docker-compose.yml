@@ -1,0 +1,19 @@
+version: "3.5"
+
+services:
+  db:
+    container_name: blog_mysql
+    image: mysql:8.0
+    environment:
+      MYSQL_USER: ${MYSQL_USER:-bloguser}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-secret}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-secret}
+      MYSQL_DATABASE: ${MYSQL_DB:-blogdb}
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db:/var/lib/mysql
+    restart: always
+volumes:
+  db:
+    driver: local
